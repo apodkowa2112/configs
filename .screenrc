@@ -1,0 +1,21 @@
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+defscrollback 5000
+# Default screens
+#screen -t root		0
+#screen -t bash		1
+#screen -t server	2	ssh me@myserver
+bindkey "^[Od" prev  # change window with ctrl-left
+bindkey "^[Oc" next  # change window with ctrl-right
+
+#start at window 1
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10                                                            
+screen 1
+
+# Enable vertical splitting
+bind 'V' vert_split
+#term screen-256color-bce
+defbce on
+shell "/bin/zsh"
