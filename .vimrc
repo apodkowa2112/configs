@@ -18,6 +18,8 @@ set thesaurus+=~/.vim/mthesaur.txt
 "  n... :  where to save the viminfo files
 set viminfo='10,\"100,:20,%,n~/.viminfo
 set modeline
+"set default number of modelines
+set modelines=5
 " case insensitive lowercase, sensitive with uppercase, xterm title and visualbell
 set ignorecase smartcase title visualbell
 autocmd BufReadPre *.doc set ro
