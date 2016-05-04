@@ -47,7 +47,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git archlinux python vi-mode)
-plugins=(git python vi-mode)
+plugins=(gitfast python vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -179,6 +179,40 @@ function lmount  {
         CWD=temp;
     fi 
 }
+# tar xz with progress bar
+function tarxz {
+   dst=$1
+   src=$2
+   flags=$3
+   tar cf - $src -P | pv -s $(($(du -sk $src | awk '{print $1}') * 1024)) | xz $flags > $dst
+}
+# tar gz with progress bar
+function targz {
+   dst=$1
+   src=$2
+   flags=$3
+   tar cf - $src -P | pv -s $(($(du -sk $src | awk '{print $1}') * 1024)) | gzip $flags > $dst
+}
+# tar with progress bar
+function tarpv {
+   dst=$1
+   src=$2
+   flags=$3
+   tar cf - $src -P | pv -s $(($(du -sk $src | awk '{print $1}') * 1024)) > $dst
+}
+function gzpv {
+# gzip with progress bar
+   src=$1
+   dst=$2
+   flags=$3
+   #if [ -z "$dst" ]
+   #then
+   #   dst=$src.gz
+   #fi
+   #echo $src '->' $dst
+   pv $src | gzip $flags > $dst
+ 
+}
 function smount { sudo /bin/mount $@; }
 function sumount { sudo /bin/umount $1 && sudo /bin/mount ; }
 alias su="sudo -i"
@@ -258,3 +292,9 @@ if [ $(tty) = '/dev/tty1' ]
 then
    startx
 fi
+
+# config for environment modules
+source /usr/local/opt/modules/Modules/init/zsh
+MODULEPATH=$MODULEPATH:~/.modules/
+#PATH=$PATH:/Applications/MATLAB_R2014b.app/bin/
+

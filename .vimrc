@@ -30,6 +30,7 @@ colorscheme darkblue
 nnoremap <F8> :setl noai nocin nosi inde=<CR>
 filetype plugin on
 syntax on
+set fdm=syntax
 au FileType tex setlocal sw=2 ts=2 spell textwidth=80 smartindent
 " Disable delimitMate on tex documents
 au FileType tex let b:delimitMate_autoclose = 0

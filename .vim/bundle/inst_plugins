@@ -1,0 +1,12 @@
+atp-vim-code/
+delimitMate/
+inst_plugins
+matchit/
+nerdtree/
+snipmate.vim/
+supertab/
+vim-matlab-behave/
+vim-ragtag/
+vim-surround/
+vimproc.vim/
+vimshell.vim/
