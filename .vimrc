@@ -5,6 +5,7 @@ set background=dark
 set number
 set tabstop=3
 set shiftwidth=3
+set si
 set expandtab
 set pastetoggle=<F2>
 set hlsearch
@@ -63,3 +64,7 @@ hi PreProc guifg=Blue
 hi Type guifg=Green
 hi Underlined guifg=Blue
 hi Todo guifg=Black
+
+"Supertab config
+"disable supertab after line beginning
+
