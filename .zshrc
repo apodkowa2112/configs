@@ -137,7 +137,7 @@ function gui  { nohup $@ &> /dev/null & }
 alias ssh_glee='ssh tpodkow2@glee.brl.illinois.edu -t /bin/zsh'
 alias rooms="sshfs -o workaround=rename apodkowa@andromeda-clued0.fnal.gov:/rooms/ /rooms/"
 alias fnal="kinit && rooms && clued0 $@"
-alias ls='ls -Gp'
+alias ls='ls -Gp --color=auto'
 alias ll='ls -Al $1 | less'
 alias ldev="ls /dev/sd*"
 alias ldevlabel="ls -l /dev/disk/by-label/"
@@ -294,7 +294,10 @@ then
 fi
 
 # config for environment modules
-source /usr/local/opt/modules/Modules/init/zsh
-MODULEPATH=$MODULEPATH:~/.modules/
+if [ hostname = 'archMBP' ]
+then
+   source /usr/local/opt/modules/Modules/init/zsh
+   MODULEPATH=$MODULEPATH:~/.modules/
+fi
 #PATH=$PATH:/Applications/MATLAB_R2014b.app/bin/
 
