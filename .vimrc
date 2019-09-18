@@ -25,6 +25,7 @@ set ignorecase smartcase title visualbell
 autocmd BufReadPre *.doc set ro
 autocmd BufReadPre *.doc set hlsearch!
 autocmd BufReadPost *.doc %!antiword "%"
+au FileType matlab set ts=4 sw=4
 "set t_Co=256
 colorscheme darkblue
 nnoremap <F8> :setl noai nocin nosi inde=<CR>
