@@ -54,6 +54,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH=$HOME/.bin:/usr/local/bin:$HOME/bin:$PATH
+if [ $(hostname) = 'rocinante' ]
+then
+   export PATH=/usr/local/MATLAB/R2016a/bin/:$PATH
+   export MATLAB_JAVA=/usr/lib/jvm/java-7-jre/jre
+fi
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 
 
@@ -131,9 +136,13 @@ fi
 #promptinit
 #prompt redhat
 
+# EDIT 6/13/18: LD_PRELOAD circumvents segfault when plotting
+function mmatlab { LD_PRELOAD=/usr/lib64/libstdc++.so.6 /usr/local/MATLAB/R2016a/bin//matlab $@ }
+function matlab  { LD_PRELOAD=/usr/lib64/libstdc++.so.6 nice -n5 /usr/local/MATLAB/R2016a/bin/matlab &> /dev/null & }
 clued0_node="manic"
 PATH="$HOME/.bin:/usr/local/bin:/usr/share/bin:$PATH"
 function gui  { nohup $@ &> /dev/null & }
+alias open="gui xdg-open $@"
 alias ssh_glee='ssh tpodkow2@glee.brl.illinois.edu -t /bin/zsh'
 alias rooms="sshfs -o workaround=rename apodkowa@andromeda-clued0.fnal.gov:/rooms/ /rooms/"
 alias fnal="kinit && rooms && clued0 $@"
@@ -144,6 +153,9 @@ alias ldevlabel="ls -l /dev/disk/by-label/"
 alias back='cd - > /dev/null'
 alias speaker='asoundconf set-default-card NVidia'
 alias headset='asoundconf set-default-card Headset'
+function fastx_kill {
+   ps ux | grep -i fastx | grep -v grep | awk '{ print $2 }' | xargs kill
+}
 function dirdiff {
     vim -c "DirDiff $1 $2";
 }
@@ -294,7 +306,7 @@ then
 fi
 
 # config for environment modules
-if [ hostname = 'archMBP' ]
+if [ $(hostname) = 'archMBP' ]
 then
    source /usr/local/opt/modules/Modules/init/zsh
    MODULEPATH=$MODULEPATH:~/.modules/
